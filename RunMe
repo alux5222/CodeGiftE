@@ -1,0 +1,19 @@
+import Data.Char (chr)
+
+a2c :: Int -> Char
+a2c = chr
+
+b2s :: [Int] -> String
+b2s binList = show (foldl (\acc bit -> acc * 2 + bit) 0 binList)
+
+b :: Int -> String
+b n = concat (replicate n (
+   [a2c(read (b2s [0,1,0,1,0,1,0,1]))] ++" "++
+   [a2c(read (b2s [0,1,0,1,0,0,1,0]))] ++" "++
+   [a2c(read (b2s [0,1,0,1,0,1,0,1]))] ++
+   [a2c(read (b2s [0,1,0,0,1,1,1,0]))] ++
+   [a2c(read (b2s [0,1,0,1,0,0,0,1]))] ++ ", "
+   ))
+
+runMe :: IO ()
+runMe = putStrLn (b (100^2))
